@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Electricity Bill Calculator</title>
+    <link rel="stylesheet" href="/static/style.css">
+
+<body>
+
+    <div class="container">
+
+        <h1>Electricity Bill Calculator</h1>
+        <p>Calculate your electricity bill easily</p>
+
+        <form method="POST" action="/calculate">
+
+            <label>Consumer Name</label>
+            <input type="text" name="name" placeholder="Enter your name" required>
+
+            <label>Consumer Number</label>
+            <input type="text" name="consumer" placeholder="Enter consumer number" required>
+
+            <label>Units Consumed (kWh)</label>
+            <input type="number" name="units" placeholder="Enter electricity units" min="0" required>
+
+            <label>Connection Type</label>
+            <select name="connection">
+                <option value="Domestic">Domestic</option>
+                <option value="Commercial">Commercial</option>
+            </select>
+
+            <button type="submit">Calculate Bill</button>
+
+        </form>
+        {% if result %}
+
+        <div class="result">
+
+            <h2>Electricity Bill Receipt</h2>
+
+            <p><strong>Consumer Name:</strong> {{ result.name }}</p>
+
+            <p><strong>Consumer Number:</strong> {{ result.consumer }}</p>
+
+            <p><strong>Units Consumed:</strong> {{ result.units }} kWh</p>
+
+            <p><strong>Connection Type:</strong> {{ result.connection }}</p>
+
+            <hr>
+
+            <h2>Total Bill Amount</h2>
+
+            <h1>₹{{ "%.2f"|format(result.bill) }}</h1>
+
+        </div>
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
